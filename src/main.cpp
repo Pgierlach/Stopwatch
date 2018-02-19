@@ -20,6 +20,7 @@ int main()
 	bool running = false;
 	bool exit = false;
 	bool first = true;
+
 	while (exit == false)
 	{
 		system("cls");
@@ -31,19 +32,19 @@ int main()
 			end = clock();
 			duration = (double)(end - begin) / CLOCKS_PER_SEC;					
 		}
-		cout << duration << endl;
+		cout << "Stopwatch: " << duration << endl;
 
-		if (kbhit())
+		if (kbhit())								// detects keyboard input
 		{
 			input = getch();
 			fflush(stdin);
 			switch (input)
 			{
-				case '1':
+				case '1':						// starts stopwatch
 				{
 					if (running == false)
 					{
-						if (first == false)
+						if (first == false)			// checks if stopwatch has been started for the first time
 						{
 							begin = clock() + begin-end;
 						}
@@ -56,11 +57,11 @@ int main()
 					}						
 					break;
 				}
-				case '2':
+				case '2':						// records a lap
 				{
 					if (running == true)
 					{
-						if (laps.size() == 10)
+						if (laps.size() == 10)			// prevents from storing more than 10 laps
 						{
 							laps.erase(laps.begin());
 						}
@@ -68,30 +69,29 @@ int main()
 					}
 					break;
 				}
-				case '3':
+				case '3':						// stops stopwatch
 				{
 					if (running == true)
 					{						
 						end = clock();
-						running = false;
-						
+						running = false;	
 					}	
 					break;
 				}
-				case '4':
+				case '4':						// resets stopwatch
 				{
 					begin = clock();
 					duration = 0;
 					break;
 				}
-				case '5':
+				case '5':						// exits the application
 				{
 					exit = true;
 					break;
 				}
 			}
 		}
-		Sleep(35);
+		Sleep(35);								// change the digit if experiencing text flickering
 	}
 	return 0;
 }
